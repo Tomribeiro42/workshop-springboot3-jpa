@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.course2.entities.Order;
+import com.educandoweb.course2.entities.Payment;
 import com.educandoweb.course2.entities.Product;
 import com.educandoweb.course2.entities.User;
 import com.educandoweb.course2.entities.enums.Category;
-import com.educandoweb.course2.entities.enums.OrderItem;
 import com.educandoweb.course2.entities.enums.OrderStatus;
 import com.educandoweb.course2.repositories.CategoryRepository;
 import com.educandoweb.course2.repositories.OrderRepository;
@@ -72,8 +72,10 @@ public class TestConfig implements CommandLineRunner {
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		
+		Payment pay1 = new Payment(null,  Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
 		
-		
+		orderRepository.save(o1);
 		
 	  
 		
