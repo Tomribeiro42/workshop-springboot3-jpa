@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import com.educandoweb.course2.entities.User;
 import com.educandoweb.course2.repositories.UserRepository;
+import com.educandoweb.course2.services.exceptions.ResourceNotFoundExpeption;
 
 @Service
 public class UserServices {
@@ -23,7 +25,7 @@ public class UserServices {
 	
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundExpeption(id));
 		
 	}
 	
